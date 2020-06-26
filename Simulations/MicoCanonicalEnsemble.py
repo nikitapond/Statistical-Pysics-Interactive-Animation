@@ -5,58 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import gridspec
-
-
-class Vec2:
-
-    def __init__(self, x, y):
-        self.x=x
-        self.y=y
-
-    def __add__(self, other):
-        if(isinstance(other, Vec2) == False):
-            print("Cannot add 2 non vec2")
-            return None
-        return Vec2(self.x+other.x, self.y+other.y)
-
-    def __mul__(self, other):
-        if(isinstance(other, float) or isinstance(other, int)):
-            return Vec2(self.x*other, self.y*other)
-        if(isinstance(other, Vec2)):
-            return Vec2(self.x * other.x, self.y*other.y)
-        return None
-
-    def __str__(self):
-        return "[" + str(self.x) + "," + str(self.y) + "]"
-
-    def sqrMag(self):
-        return self.x*self.x + self.y*self.y
-
-    def mag(self):
-        return np.sqrt(self.x*self.x + self.y*self.y)
-
-
-class Vec2i:
-    def __init__(self, x, y):
-        if((isinstance(x,int) or isinstance(y, int)) == False):
-            print("Vec2i must be constructed from integer values")
-        self.x=x
-        self.y=y
-
-    def __hash__(self):
-        return self.x<<16 + self.y
-
-    def __eq__(self, other):
-        return (self.x, self.y) == (other.x, other.y)
-
-    def __ne__(self, other):
-        # Not strictly necessary, but to avoid having both x==y and x!=y
-        # True at the same time
-        return not (self == other)
-
-    @staticmethod
-    def RoundVec2(vec2):
-        return Vec2i(int(vec2.x), int(vec2.y))
+from Util import *
 
 
 class Particle:
