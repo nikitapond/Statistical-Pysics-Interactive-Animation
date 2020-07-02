@@ -1,4 +1,7 @@
 import sys
+
+from Simulations.Util import Vec2i
+
 sys.path.append('C:\\Users\\nikit\\AppData\\Local\\Programs\\Python\\python38\\lib\\site-packages')
 
 import numpy as np
@@ -65,7 +68,7 @@ class AnimationSystem:
 
 
     def addParticle(self, particle, energy):
-        vec2i = Vec2i.RoundVec2(particle.position)
+        vec2i = Vec2i.roundVec2(particle.position)
         self.grid[vec2i].append(particle)
         self.partPosX.append(particle.position.x)
         self.partPosY.append(particle.position.y)
@@ -147,7 +150,7 @@ class AnimationSystem:
                     totalPart+=1
                     nPart, dEn= self.updateParticle(part, dt)
                     totalEnergy+=dEn
-                    nVec2i = Vec2i.RoundVec2(nPart.position)
+                    nVec2i = Vec2i.roundVec2(nPart.position)
                     nextGrid[nVec2i].append(nPart)
                     self.partPosX.append(nPart.position.x)
                     self.partPosY.append(nPart.position.y)
@@ -171,6 +174,7 @@ class AnimationSystem:
 
         if len(self.time) * self.dt > 20:
             self.particleCountPlot.set_xlim([len(self.time) * self.dt - 20 * self.dt, len(self.time) * self.dt])
+
         self.particleCount = self.particleCountPlot.plot(self.time, self.totalParticleCountData, color='g')
         return self.particleCount
 
@@ -237,5 +241,5 @@ for i in range(20):
 
 an = AnimationSystem(size=(18, 11))
 
-an.addRandomParticles(20)
+an.addRandomParticles(200)
 an.runSimulation(400)
